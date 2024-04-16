@@ -7,6 +7,9 @@ import {Abibas} from "./components/pages/Abibas";
 import styles from "./components/Site.module.css";
 import {S} from './components/pages/_styles';
 import {Model} from './components/pages/Model';
+import {Cart} from "./components/pages/Cart";
+import {useSelector} from "react-redux";
+import {AppRootState} from "./redux/store";
 
 
 export const PATH = {
@@ -16,6 +19,7 @@ export const PATH = {
 } as const;
 
 function App() {
+    const items = useSelector<AppRootState, number[]>(state => state.cart.cartItems)
     return (
         <div>
             <div className={styles.header}><h1>HEADER</h1></div>
@@ -24,11 +28,13 @@ function App() {
                     <S.NavWrapper><NavLink to={PATH.ADIDAS}>Adidas</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.PUMA}>Puma</NavLink></S.NavWrapper>
                     <S.NavWrapper><NavLink to={PATH.ABIBAS}>Abibas</NavLink></S.NavWrapper>
+                    <NavLink to={"/Cart"}>Cart {items.length? items.length: ''}</NavLink>
                 </div>
                 <div className={styles.content}>
                     <Routes>
                         <Route path={'/'} element={<Navigate to={'/adidas'}/>}/>
 
+                        <Route path={'/Cart'} element={<Cart/>}/>
                         <Route path={PATH.ADIDAS} element={<Adidas/>}/>
                         <Route path={PATH.PUMA} element={<Puma/>}/>
                         <Route path={PATH.ABIBAS} element={<Abibas/>}/>
