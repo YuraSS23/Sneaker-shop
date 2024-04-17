@@ -10,6 +10,7 @@ import {Model} from './components/pages/Model';
 import {Cart} from "./components/pages/Cart";
 import {useSelector} from "react-redux";
 import {AppRootState} from "./redux/store";
+import {cartItem} from "./redux/cart-reducer";
 
 
 export const PATH = {
@@ -19,7 +20,7 @@ export const PATH = {
 } as const;
 
 function App() {
-    const items = useSelector<AppRootState, number[]>(state => state.cart.cartItems)
+    const items = useSelector<AppRootState, cartItem[]>(state => state.cart)
     return (
         <div>
             <div className={styles.header}><h1>HEADER</h1></div>

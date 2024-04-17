@@ -1,19 +1,21 @@
-type initialStateType = {
-    cartItems: number[]
+export type cartItem = {
+    id: number,
+    count: number
 }
 
-const initialState: initialStateType = {
-    cartItems: []
-}
+type cartItems = cartItem[]
 
-export const cartReducer = (state: initialStateType = initialState, action: ActionsType): initialStateType => {
+const initialState: cartItems = []
+
+export const cartReducer = (state: cartItems = initialState, action: ActionsType): cartItems => {
     switch (action.type) {
         case 'ADD-ITEM-TO-CART': {
-            console.log(state)
-            return {...state, cartItems: [...state.cartItems, action.id]}
+            if (state.find(el=>el.id===action.id)) return state.map(el=>el.id===action.id ? {...el, count: el.count+1} : el)
+            return [...state, {id: action.id, count: 1}]
         }
         case 'REMOVE-ITEM-FROM-CART':
-            return {...state, cartItems: state.cartItems.filter(el=>el!==action.id)}
+            debugger
+            return state.filter(el=>el.id!==action.id)
         default:
             return state
     }
