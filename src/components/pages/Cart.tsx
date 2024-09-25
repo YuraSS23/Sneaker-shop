@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../../redux/store";
 import {adidasArr} from "./Adidas";
-import {cartItem, removeItemFromCartAC} from "../../redux/cart-reducer";
+import {addItemToCartAC, cartItem, removeItemFromCartAC} from "../../redux/cart-reducer";
 
 export const Cart = () => {
     const dispatch = useDispatch()
@@ -18,7 +18,7 @@ export const Cart = () => {
             <div>
                 <button>-</button>
                 {el.count}
-                <button>+</button>
+                <button onClick={()=>dispatch(addItemToCartAC(el.id))}>+</button>
             </div>
             <button onClick={() => removeItem(el.id)}>Remove</button>
         </div>})}

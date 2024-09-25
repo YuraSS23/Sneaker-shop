@@ -14,7 +14,6 @@ export const cartReducer = (state: cartItems = initialState, action: ActionsType
             return [...state, {id: action.id, count: 1}]
         }
         case 'REMOVE-ITEM-FROM-CART':
-            debugger
             return state.filter(el=>el.id!==action.id)
         default:
             return state
